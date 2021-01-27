@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace VitesseCms\Sef\Controllers;
 
@@ -6,16 +6,10 @@ use VitesseCms\Admin\AbstractAdminController;
 use VitesseCms\Core\Helpers\Item;
 use VitesseCms\Sef\Forms\RedirectForm;
 use VitesseCms\Sef\Models\Redirect;
+use VitesseCms\Sef\Repositories\AdminRepositoriesInterface;
 
-/**
- * Class AdmindatagroupController
- */
-class AdminredirectController extends AbstractAdminController
+class AdminredirectController extends AbstractAdminController implements AdminRepositoriesInterface
 {
-    /**
-     * onConstruct
-     * @throws \Phalcon\Mvc\Collection\Exception
-     */
     public function onConstruct()
     {
         parent::onConstruct();

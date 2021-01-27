@@ -26,11 +26,7 @@ class SefHelper
         endif;
     }
 
-    public static function getComponentURL(
-        string $module,
-        string $controller,
-        string $action
-    ): string {
+    public static function getComponentURL(string $module, string $controller, string $action): string {
         return Di::getDefault()->get('url')->getBaseUri().$module.'/'.$controller.'/'.$action.'/';
     }
 

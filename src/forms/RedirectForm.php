@@ -1,71 +1,53 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace VitesseCms\Sef\Forms;
 
 use VitesseCms\Database\AbstractCollection;
-use VitesseCms\Form\Helpers\ElementHelper;
-use VitesseCms\Language\Models\Language;
-use VitesseCms\Form\AbstractForm;
+use VitesseCms\Form\AbstractFormWithRepository;
+use VitesseCms\Form\Interfaces\FormWithRepositoryInterface;
+use VitesseCms\Form\Models\Attributes;
+use VitesseCms\Sef\Models\Redirect;
+use VitesseCms\Sef\Repositories\AdminRepositoryInterface;
 
-/**
- * Class RedirectForm
- */
-class RedirectForm extends AbstractForm
+class RedirectForm extends AbstractFormWithRepository
 {
+    /**
+     * @var Redirect
+     */
+    protected $_entity;
 
     /**
-     * initialize
-     *
-     * @param AbstractCollection|null $item
+     * @var AdminRepositoryInterface
      */
-    public function initialize(AbstractCollection $item = null)
-    {
-        $this->_(
-            'text',
-            '%ADMIN_FROM%',
-            'from',
-            [
-                'required' => true,
-            ]
-        );
-        $this->_(
-            'text',
-            '%ADMIN_TO%',
-            'to',
-            [
-                'required' => true,
-            ]
-        );
+    protected $repositories;
 
-        $languages = [
-            [
-                'value'    => '',
-                'label'    => '%FORM_CHOOSE_AN_OPTION%',
-                'selected' => false,
-            ],
-        ];
-        Language::setFindPublished(false);
-        foreach (Language::findAll() as $language) :
+    public function buildForm(): FormWithRepositoryInterface
+    {
+        $languageOptionss = [['value'    => '', 'label'    => '%FORM_CHOOSE_AN_OPTION%', 'selected' => false]];
+        $languages = $this->repositories->language->findAll(null,false);
+
+        while ($languages->valid()) :
+            $language = $languages->current();
+
             $selected = false;
-            if ($item->_('languageShort') === $language->_('short')) :
+            if ($this->_entity->getLanguageShort() === $language->getShortCode()) :
                 $selected = true;
             endif;
 
-            $languages[] = [
-                'value'    => $language->_('short'),
-                'label'    => $language->_('name'),
+            $languageOptionss[] = [
+                'value'    => $language->getShortCode(),
+                'label'    => $language->getNameField(),
                 'selected' => $selected,
             ];
-        endforeach;
-        $this->_(
-            'select',
-            '%ADMIN_LANGUAGE%',
-            'language',
-            [ 'options'  => $languages]
-        );
-        $this->_(
-            'submit',
-            '%CORE_SAVE%'
-        );
+            $languages->next();
+        endwhile;
+
+        $this->addText('%ADMIN_FROM%', 'from', (new Attributes())->setRequired())
+            ->addText('%ADMIN_TO%', 'to',(new Attributes())->setRequired())
+            ->addDropdown('%ADMIN_LANGUAGE%', 'language', (new Attributes())->setOptions($languageOptionss))
+            ->addSubmitButton('%CORE_SAVE%')
+        ;
+
+        return $this;
     }
 }

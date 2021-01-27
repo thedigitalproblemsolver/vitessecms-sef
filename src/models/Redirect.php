@@ -8,6 +8,48 @@ use VitesseCms\Sef\Utils\SefUtil;
 
 class Redirect extends AbstractCollection
 {
+    /**
+     * @var string
+     */
+    public $from;
+
+    /**
+     * @var string
+     */
+    public $to;
+
+    /**
+     * @var string
+     */
+    public $languageShort;
+
+    public function setFrom(string $from): Redirect
+    {
+        $this->from = $from;
+
+        return $this;
+    }
+
+    public function setTo(string $to): Redirect
+    {
+        $this->to = $to;
+
+        return $this;
+    }
+
+    public function setLanguageShort(?string $languageShort): Redirect
+    {
+        $this->languageShort = $languageShort;
+
+        return $this;
+    }
+
+    public function getLanguageShort(): ?string
+    {
+        return $this->languageShort;
+    }
+
+    //TODO move to listener/mustache?
     public function afterFetch()
     {
         $this->set('name', $this->_('from') . ' > ' . $this->_('to'));
@@ -25,6 +67,7 @@ class Redirect extends AbstractCollection
         endif;
     }
 
+    //TODO move to listener
     public function validation(): bool
     {
         $this->set('from', SefUtil::fixSlashes($this->_('from')));

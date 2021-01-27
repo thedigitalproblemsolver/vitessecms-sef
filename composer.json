@@ -18,5 +18,6 @@
     }
   },
   "require": {
+    "vitessecms/language": "~0.0.1"
   }
 }
