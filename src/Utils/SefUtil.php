@@ -5,20 +5,21 @@ namespace VitesseCms\Sef\Utils;
 use Phalcon\Di;
 use VitesseCms\Core\Utils\UrlUtil;
 
-class SefUtil {
-    public static function fixSlashes(string $slug) : string
+class SefUtil
+{
+    public static function fixSlashes(string $slug): string
     {
-        $file = str_replace('//','/',Di::getDefault()->get('config')->get('webDir').$slug);
+        $file = str_replace('//', '/', Di::getDefault()->get('config')->get('webDir') . $slug);
         $urlExists = false;
 
-        if(Di::getDefault()->get('config')->get('importUrl')) :
-            $url = Di::getDefault()->get('config')->get('importUrl').$slug;
+        if (Di::getDefault()->get('config')->get('importUrl')) :
+            $url = Di::getDefault()->get('config')->get('importUrl') . $slug;
             $urlExists = UrlUtil::exists($url);
         endif;
 
-        if( !is_file($file) && !$urlExists) :
+        if (!is_file($file) && !$urlExists) :
             $slug = rtrim($slug, '/') . '/';
-            $slug = '/'.ltrim($slug, '/');
+            $slug = '/' . ltrim($slug, '/');
         endif;
 
 
@@ -33,7 +34,6 @@ class SefUtil {
             strpos($userAgent, 'googlebot') === true
             || strpos($userAgent, 'google-structured-data-testing-tool') === true
             || strpos($userAgent, 'bingbot') === true
-            || strpos($userAgent, 'msnbot') === true
-        ;
+            || strpos($userAgent, 'msnbot') === true;
     }
 }

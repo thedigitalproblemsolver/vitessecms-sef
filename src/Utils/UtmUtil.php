@@ -63,21 +63,34 @@ class UtmUtil
         }
     }
 
-    public static function reset(): void
-    {
-        self::$utm = [];
-    }
-
     public static function append(string $string, bool $reset = true): string
     {
         $regex = '/<a href="' . self::getRegexBase() . '([^"]*)"([^>]*)>/i';
         $return = preg_replace_callback($regex, 'self::appendToTag', $string);
 
-        if($reset) :
+        if ($reset) :
             self::reset();
         endif;
 
         return $return;
+    }
+
+    protected static function getRegexBase(bool $str_replace = true): string
+    {
+        $url = Di::getDefault()->get('url')->getBaseUri();
+
+        $url = substr($url, 0, -1);
+
+        if ($str_replace) :
+            return str_replace('/', '\/', $url);
+        endif;
+
+        return $url;
+    }
+
+    public static function reset(): void
+    {
+        self::$utm = [];
     }
 
     public static function appendToUrl(string $url, bool $reset = true): string
@@ -89,7 +102,7 @@ class UtmUtil
             $url .= http_build_query(self::$utm);
         endif;
 
-        if($reset) :
+        if ($reset) :
             self::reset();
         endif;
 
@@ -106,19 +119,6 @@ class UtmUtil
             $url .= http_build_query(self::$utm);
         endif;
 
-        return '<a href="' . self::getRegexBase(false) . $url.'"'.$match[2].'>';
-    }
-
-    protected static function getRegexBase(bool $str_replace = true): string
-    {
-        $url = Di::getDefault()->get('url')->getBaseUri();
-
-        $url = substr($url, 0,  - 1);
-
-        if($str_replace) :
-            return str_replace('/', '\/', $url);
-        endif;
-
-        return $url;
+        return '<a href="' . self::getRegexBase(false) . $url . '"' . $match[2] . '>';
     }
 }

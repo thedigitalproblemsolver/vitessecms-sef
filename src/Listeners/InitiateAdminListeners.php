@@ -10,6 +10,6 @@ class InitiateAdminListeners
     public static function setListeners(Manager $eventsManager): void
     {
         $eventsManager->attach('adminMenu', new AdminMenuListener());
-        $eventsManager->attach(AdminredirectController::class,new AdminredirectControllerListener());
+        $eventsManager->attach(AdminredirectController::class, new AdminredirectControllerListener());
     }
 }
