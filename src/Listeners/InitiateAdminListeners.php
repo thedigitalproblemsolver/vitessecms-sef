@@ -3,7 +3,6 @@
 namespace VitesseCms\Sef\Listeners;
 
 use Phalcon\Events\Manager;
-use VitesseCms\Datagroup\Listeners\AdmindatagroupControllerListener;
 use VitesseCms\Sef\Controllers\AdminredirectController;
 
 class InitiateAdminListeners

@@ -2,8 +2,8 @@
 
 namespace VitesseCms\Sef\Models;
 
-use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Admin\Utils\AdminUtil;
+use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Sef\Utils\SefUtil;
 
 class Redirect extends AbstractCollection

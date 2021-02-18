@@ -2,7 +2,6 @@
 
 namespace VitesseCms\Sef\Forms;
 
-use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Form\AbstractFormWithRepository;
 use VitesseCms\Form\Interfaces\FormWithRepositoryInterface;
 use VitesseCms\Form\Models\Attributes;

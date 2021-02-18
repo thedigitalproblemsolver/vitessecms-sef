@@ -2,8 +2,8 @@
 
 namespace VitesseCms\Sef\Utils;
 
-use VitesseCms\Core\Utils\UrlUtil;
 use Phalcon\Di;
+use VitesseCms\Core\Utils\UrlUtil;
 
 class SefUtil {
     public static function fixSlashes(string $slug) : string

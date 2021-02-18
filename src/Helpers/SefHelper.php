@@ -2,13 +2,13 @@
 
 namespace VitesseCms\Sef\Helpers;
 
+use Phalcon\Di;
 use VitesseCms\Content\Models\Item;
 use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Database\Utils\MongoUtil;
 use VitesseCms\Language\Models\Language;
 use VitesseCms\Sef\Factories\RedirectFactory;
 use VitesseCms\Sef\Models\Redirect;
-use Phalcon\Di;
 
 class SefHelper
 {

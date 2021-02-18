@@ -2,9 +2,9 @@
 
 namespace VitesseCms\Sef;
 
+use Phalcon\DiInterface;
 use VitesseCms\Admin\Utils\AdminUtil;
 use VitesseCms\Core\AbstractModule;
-use Phalcon\DiInterface;
 use VitesseCms\Language\Repositories\LanguageRepository;
 use VitesseCms\Sef\Repositories\AdminRepositoryCollection;
 use VitesseCms\Sef\Repositories\RedirectRepository;
