@@ -2,8 +2,8 @@
 
 namespace VitesseCms\Sef\Models;
 
-use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Admin\Utils\AdminUtil;
+use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Sef\Utils\SefUtil;
 
 class Redirect extends AbstractCollection
@@ -37,6 +37,11 @@ class Redirect extends AbstractCollection
         return $this;
     }
 
+    public function getLanguageShort(): ?string
+    {
+        return $this->languageShort;
+    }
+
     public function setLanguageShort(?string $languageShort): Redirect
     {
         $this->languageShort = $languageShort;
@@ -44,12 +49,8 @@ class Redirect extends AbstractCollection
         return $this;
     }
 
-    public function getLanguageShort(): ?string
-    {
-        return $this->languageShort;
-    }
-
     //TODO move to listener/mustache?
+
     public function afterFetch()
     {
         $this->set('name', $this->_('from') . ' > ' . $this->_('to'));
@@ -61,7 +62,7 @@ class Redirect extends AbstractCollection
             endif;
             $this->set(
                 'adminListName',
-                '<i class="'.$iconClass . ' mr-2"></i>' .
+                '<i class="' . $iconClass . ' mr-2"></i>' .
                 $this->_('from') . ' > ' . $this->_('to')
             );
         endif;

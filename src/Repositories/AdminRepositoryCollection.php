@@ -14,7 +14,8 @@ class AdminRepositoryCollection implements BaseRepositoriesInterface
 
     public function __construct(
         LanguageRepository $languageRepository
-    ) {
+    )
+    {
         $this->language = $languageRepository;
     }
 }

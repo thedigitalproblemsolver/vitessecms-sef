@@ -2,13 +2,13 @@
 
 namespace VitesseCms\Sef\Helpers;
 
+use Phalcon\Di;
 use VitesseCms\Content\Models\Item;
 use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Database\Utils\MongoUtil;
 use VitesseCms\Language\Models\Language;
 use VitesseCms\Sef\Factories\RedirectFactory;
 use VitesseCms\Sef\Models\Redirect;
-use Phalcon\Di;
 
 class SefHelper
 {
@@ -21,13 +21,14 @@ class SefHelper
             && $redirect->_('to') !== $_SERVER['REQUEST_URI']
         ) :
             header('HTTP/1.1 301 Moved Permanently');
-            header('Location: '.$redirect->_('to'));
+            header('Location: ' . $redirect->_('to'));
             die();
         endif;
     }
 
-    public static function getComponentURL(string $module, string $controller, string $action): string {
-        return Di::getDefault()->get('url')->getBaseUri().$module.'/'.$controller.'/'.$action.'/';
+    public static function getComponentURL(string $module, string $controller, string $action): string
+    {
+        return Di::getDefault()->get('url')->getBaseUri() . $module . '/' . $controller . '/' . $action . '/';
     }
 
     public static function saveRedirectFromItem(string $oldItemId, array $newSlug): void
@@ -43,8 +44,8 @@ class SefHelper
                     && $oldItem->_('slug', $language->_('short')) !== $newSlug[$language->_('short')]
                     && substr_count($newSlug[$language->_('short')], 'page:') === 0
                 ) :
-                    $from = '/'.$oldItem->_('slug', $language->_('short'));
-                    $to = '/'.$newSlug[$language->_('short')];
+                    $from = '/' . $oldItem->_('slug', $language->_('short'));
+                    $to = '/' . $newSlug[$language->_('short')];
 
                     //check of to + from al bestaat en verwijder deze
                     Redirect::setFindValue('to', $from);
@@ -108,8 +109,8 @@ class SefHelper
                     $name = $item->_('name');
                 endif;
                 $string = str_replace(
-                    ['href="page:'.$value.'"', 'page:'.$value.':name'],
-                    ['href="'.$replace.'"', $name],
+                    ['href="page:' . $value . '"', 'page:' . $value . ':name'],
+                    ['href="' . $replace . '"', $name],
                     $string
                 );
                 $parsed[] = $value;
@@ -118,8 +119,8 @@ class SefHelper
 
         if ($currentId !== null):
             $string = str_replace(
-                ['class="'.$currentId.'"'],
-                ['class="active '.$currentId.'"'],
+                ['class="' . $currentId . '"'],
+                ['class="active ' . $currentId . '"'],
                 $string
             );
         endif;
