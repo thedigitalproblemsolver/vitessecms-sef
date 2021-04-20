@@ -5,6 +5,7 @@ namespace VitesseCms\Sef\Utils;
 use Phalcon\Di;
 use Phalcon\Exception;
 use Phalcon\Utils\Slug;
+use function count;
 
 class UtmUtil
 {
@@ -95,7 +96,7 @@ class UtmUtil
 
     public static function appendToUrl(string $url, bool $reset = true): string
     {
-        if (\count(self::$utm) > 0) :
+        if (count(self::$utm) > 0) :
             if (strpos($url, '?') === false) {
                 $url .= '?';
             }
@@ -112,7 +113,7 @@ class UtmUtil
     protected static function appendToTag(array $match): string
     {
         $url = $match[1];
-        if (\count(self::$utm) > 0) :
+        if (count(self::$utm) > 0) :
             if (strpos($url, '?') === false) {
                 $url .= '?';
             }
