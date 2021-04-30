@@ -3,13 +3,13 @@
 namespace VitesseCms\Sef\Listeners;
 
 use Phalcon\Events\Manager;
-use VitesseCms\Sef\Controllers\AdminredirectController;
+use VitesseCms\Core\AbstractController;
 
-class InitiateAdminListeners
+class InitiateListeners
 {
     public static function setListeners(Manager $eventsManager): void
     {
         $eventsManager->attach('adminMenu', new AdminMenuListener());
-        $eventsManager->attach(AdminredirectController::class, new AdminredirectControllerListener());
+        $eventsManager->attach(AbstractController::class, new AbstractControllerListener());
     }
 }
