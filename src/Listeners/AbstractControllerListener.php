@@ -9,7 +9,9 @@ class AbstractControllerListener
 {
     public function prepareHtmlView(Event $event, ViewService $viewService): void
     {
-        $this->setMetaInformation($viewService);
+        if($viewService->hasCurrentItem()) :
+            $this->setMetaInformation($viewService);
+        endif;
     }
 
     protected function setMetaInformation(ViewService $viewService): void
