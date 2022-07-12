@@ -4,10 +4,12 @@ namespace VitesseCms\Sef;
 
 use Phalcon\DiInterface;
 use VitesseCms\Admin\Utils\AdminUtil;
+use VitesseCms\Content\Repositories\ItemRepository;
 use VitesseCms\Core\AbstractModule;
+use VitesseCms\Datafield\Repositories\DatafieldRepository;
+use VitesseCms\Datagroup\Repositories\DatagroupRepository;
 use VitesseCms\Language\Repositories\LanguageRepository;
 use VitesseCms\Sef\Repositories\AdminRepositoryCollection;
-use VitesseCms\Sef\Repositories\RedirectRepository;
 
 class Module extends AbstractModule
 {
@@ -17,7 +19,10 @@ class Module extends AbstractModule
 
         if (AdminUtil::isAdminPage()) :
             $di->setShared('repositories', new AdminRepositoryCollection(
-                new LanguageRepository()
+                new LanguageRepository(),
+                new ItemRepository(),
+                new DatagroupRepository(),
+                new DatafieldRepository()
             ));
         endif;
     }
