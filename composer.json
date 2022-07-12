@@ -2,7 +2,11 @@
   "name": "vitessecms/sef",
   "type": "library",
   "description": "Sef module for VitesseCms",
-  "keywords": ["php","phalcon","vitessecms"],
+  "keywords": [
+    "php",
+    "phalcon",
+    "vitessecms"
+  ],
   "homepage": "https://github.com/thedigitalproblemsolver/VitesseCMS",
   "license": "GPL-2.0-or-later",
   "version": "0.2.1",
@@ -23,6 +27,7 @@
     "vitessecms/form": "~0.2.9",
     "vitessecms/database": "~0.2.5",
     "vitessecms/admin": "~0.2.9",
-    "vitessecms/content": "~0.2.19"
+    "vitessecms/content": "~0.2.19",
+    "vitessecms/mustache": "~0.2.8"
   }
 }

@@ -13,5 +13,9 @@ class AdminMenuListener
         $children = new AdminMenuNavBarChildren();
         $children->addChild('SEF-redirects', 'admin/sef/adminredirect/adminList');
         $adminMenu->addDropdown('System', $children);
+
+        $children = new AdminMenuNavBarChildren();
+        $children->addChild('Fix empty slugs', 'admin/sef/adminfixslugs/index');
+        $adminMenu->addDropdown('Maintenance', $children);
     }
 }

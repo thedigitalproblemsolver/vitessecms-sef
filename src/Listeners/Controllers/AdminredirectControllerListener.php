@@ -9,9 +9,9 @@ use VitesseCms\Admin\Forms\AdminlistFormInterface;
 class AdminredirectControllerListener
 {
     public function adminListFilter(
-        Event $event,
+        Event                   $event,
         AbstractAdminController $controller,
-        AdminlistFormInterface $form
+        AdminlistFormInterface  $form
     ): string
     {
         $form->addText('From', 'filter[from]');
