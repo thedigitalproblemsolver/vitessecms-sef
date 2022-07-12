@@ -15,7 +15,7 @@ class AdminfixslugsController extends AbstractAdminController implements AdminRe
 {
     public function IndexAction()
     {
-        $items = $this->repositories->item->findAll(new FindValueIterator([new FindValue('slug',null)]),true,99999);
+        $items = $this->repositories->item->findAll(new FindValueIterator([new FindValue('slug', null)]), true, 99999);
         $this->view->setVar(
             'content',
             $this->eventsManager->fire(ViewEnum::RENDER_TEMPLATE_EVENT, new RenderTemplateDTO(
@@ -31,7 +31,7 @@ class AdminfixslugsController extends AbstractAdminController implements AdminRe
 
     public function fixslugsAction()
     {
-        $items = $this->repositories->item->findAll(new FindValueIterator([new FindValue('slug',null)]),true,1);
+        $items = $this->repositories->item->findAll(new FindValueIterator([new FindValue('slug', null)]), true, 1);
 
         while ($items->valid()) :
             $item = $items->current();
@@ -47,12 +47,12 @@ class AdminfixslugsController extends AbstractAdminController implements AdminRe
             $this->log->write(
                 $item->getId(),
                 Item::class,
-                'Slug fixed for '.$item->getNameField().' to <a href="'.$this->url->getBaseUri().$item->getSlug().'" target="_blank">view page</a>'
+                'Slug fixed for ' . $item->getNameField() . ' to <a href="' . $this->url->getBaseUri() . $item->getSlug() . '" target="_blank">view page</a>'
             );
             $items->next();
         endwhile;
 
-        $this->flash->setSucces($items->count().' slugs fixed');
+        $this->flash->setSucces($items->count() . ' slugs fixed');
         $this->redirect();
     }
 
