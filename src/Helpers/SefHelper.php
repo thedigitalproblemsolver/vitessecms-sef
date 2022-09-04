@@ -15,13 +15,14 @@ class SefHelper
     public static function redirect(string $from): void
     {
         Redirect::setFindValue('from', $from);
+        /** @var Redirect $redirect */
         $redirect = Redirect::findFirst();
         if (
             $redirect
-            && $redirect->_('to') !== $_SERVER['REQUEST_URI']
+            && $redirect->getTo() !== $_SERVER['REQUEST_URI']
         ) :
             header('HTTP/1.1 301 Moved Permanently');
-            header('Location: ' . $redirect->_('to'));
+            header('Location: ' . $redirect->getTo());
             die();
         endif;
     }
