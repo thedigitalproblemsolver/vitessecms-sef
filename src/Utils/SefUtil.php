@@ -2,7 +2,7 @@
 
 namespace VitesseCms\Sef\Utils;
 
-use Phalcon\Di;
+use Phalcon\Di\Di;
 use VitesseCms\Core\Utils\UrlUtil;
 
 class SefUtil

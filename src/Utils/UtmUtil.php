@@ -2,7 +2,7 @@
 
 namespace VitesseCms\Sef\Utils;
 
-use Phalcon\Di;
+use Phalcon\Di\Di;
 use Phalcon\Exception;
 use Phalcon\Utils\Slug;
 use function count;
@@ -76,19 +76,6 @@ class UtmUtil
         return $return;
     }
 
-    protected static function getRegexBase(bool $str_replace = true): string
-    {
-        $url = Di::getDefault()->get('url')->getBaseUri();
-
-        $url = substr($url, 0, -1);
-
-        if ($str_replace) :
-            return str_replace('/', '\/', $url);
-        endif;
-
-        return $url;
-    }
-
     public static function reset(): void
     {
         self::$utm = [];
@@ -105,6 +92,19 @@ class UtmUtil
 
         if ($reset) :
             self::reset();
+        endif;
+
+        return $url;
+    }
+
+    protected static function getRegexBase(bool $str_replace = true): string
+    {
+        $url = Di::getDefault()->get('url')->getBaseUri();
+
+        $url = substr($url, 0, -1);
+
+        if ($str_replace) :
+            return str_replace('/', '\/', $url);
         endif;
 
         return $url;
