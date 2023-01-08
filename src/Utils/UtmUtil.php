@@ -3,8 +3,7 @@
 namespace VitesseCms\Sef\Utils;
 
 use Phalcon\Di\Di;
-use Phalcon\Exception;
-use Phalcon\Utils\Slug;
+use Phalcon\Di\Exception;
 use function count;
 
 class UtmUtil
@@ -17,7 +16,7 @@ class UtmUtil
     public static function setSource(string $source): void
     {
         try {
-            self::$utm['utm_source'] = Slug::generate($source);
+            self::$utm['utm_source'] = SefUtil::generateSlugFromString($source);
         } catch (Exception $exception) {
             echo $exception->getMessage();
             die();
@@ -27,7 +26,7 @@ class UtmUtil
     public static function setMedium(string $medium): void
     {
         try {
-            self::$utm['utm_medium'] = Slug::generate($medium);
+            self::$utm['utm_medium'] = SefUtil::generateSlugFromString($medium);
         } catch (Exception $exception) {
             echo $exception->getMessage();
             die();
@@ -37,7 +36,7 @@ class UtmUtil
     public static function setCampaign(string $campaign): void
     {
         try {
-            self::$utm['utm_campaign'] = Slug::generate($campaign);
+            self::$utm['utm_campaign'] = SefUtil::generateSlugFromString($campaign);
         } catch (Exception $exception) {
             echo $exception->getMessage();
             die();
@@ -47,7 +46,7 @@ class UtmUtil
     public static function setTerm(string $term): void
     {
         try {
-            self::$utm['utm_term'] = Slug::generate($term);
+            self::$utm['utm_term'] = SefUtil::generateSlugFromString($term);
         } catch (Exception $exception) {
             echo $exception->getMessage();
             die();
@@ -57,7 +56,7 @@ class UtmUtil
     public static function setContent(string $content): void
     {
         try {
-            self::$utm['utm_content'] = Slug::generate($content);
+            self::$utm['utm_content'] = SefUtil::generateSlugFromString($content);
         } catch (Exception $exception) {
             echo $exception->getMessage();
             die();
@@ -76,6 +75,19 @@ class UtmUtil
         return $return;
     }
 
+    protected static function getRegexBase(bool $str_replace = true): string
+    {
+        $url = Di::getDefault()->get('url')->getBaseUri();
+
+        $url = substr($url, 0, -1);
+
+        if ($str_replace) :
+            return str_replace('/', '\/', $url);
+        endif;
+
+        return $url;
+    }
+
     public static function reset(): void
     {
         self::$utm = [];
@@ -92,19 +104,6 @@ class UtmUtil
 
         if ($reset) :
             self::reset();
-        endif;
-
-        return $url;
-    }
-
-    protected static function getRegexBase(bool $str_replace = true): string
-    {
-        $url = Di::getDefault()->get('url')->getBaseUri();
-
-        $url = substr($url, 0, -1);
-
-        if ($str_replace) :
-            return str_replace('/', '\/', $url);
         endif;
 
         return $url;
