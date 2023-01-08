@@ -3,6 +3,7 @@
 namespace VitesseCms\Sef\Utils;
 
 use Phalcon\Di\Di;
+use Phalcon\Filter\FilterFactory;
 use VitesseCms\Core\Utils\UrlUtil;
 
 class SefUtil
@@ -35,5 +36,13 @@ class SefUtil
             || strpos($userAgent, 'google-structured-data-testing-tool') === true
             || strpos($userAgent, 'bingbot') === true
             || strpos($userAgent, 'msnbot') === true;
+    }
+
+    public static function generateSlugFromString(string $string): string
+    {
+        $factory = new FilterFactory();
+        $locator = $factory->newInstance();
+
+        return $locator->sanitize($string, ['url', 'lower']);
     }
 }
