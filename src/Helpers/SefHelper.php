@@ -2,7 +2,7 @@
 
 namespace VitesseCms\Sef\Helpers;
 
-use Phalcon\Di;
+use Phalcon\Di\Di;
 use VitesseCms\Content\Models\Item;
 use VitesseCms\Database\AbstractCollection;
 use VitesseCms\Database\Utils\MongoUtil;
