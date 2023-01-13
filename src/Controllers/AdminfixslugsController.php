@@ -31,7 +31,7 @@ class AdminfixslugsController extends AbstractAdminController implements AdminRe
 
     public function fixslugsAction()
     {
-        $items = $this->repositories->item->findAll(new FindValueIterator([new FindValue('slug', null)]), true, 1);
+        $items = $this->repositories->item->findAll(new FindValueIterator([new FindValue('slug', null)]), true, 999);
 
         while ($items->valid()) :
             $item = $items->current();
