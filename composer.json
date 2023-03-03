@@ -9,7 +9,7 @@
   ],
   "homepage": "https://github.com/thedigitalproblemsolver/VitesseCMS",
   "license": "GPL-2.0-or-later",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "authors": [
     {
       "name": "Jasper Jaklofsky",
@@ -23,11 +23,11 @@
   },
   "require": {
     "vitessecms/language": "~0.3.4",
-    "vitessecms/core": "~0.4.6",
+    "vitessecms/core": "~0.4.8",
     "vitessecms/form": "~0.4.3",
     "vitessecms/database": "~0.3.4",
     "vitessecms/admin": "~0.4.0",
-    "vitessecms/content": "~0.4.4",
-    "vitessecms/mustache": "~0.4.4"
+    "vitessecms/content": "~0.4.5",
+    "vitessecms/mustache": "~0.4.7"
   }
 }
