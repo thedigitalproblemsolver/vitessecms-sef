@@ -6,19 +6,13 @@ use VitesseCms\Form\AbstractFormWithRepository;
 use VitesseCms\Form\Interfaces\FormWithRepositoryInterface;
 use VitesseCms\Form\Models\Attributes;
 use VitesseCms\Sef\Models\Redirect;
-use VitesseCms\Sef\Repositories\AdminRepositoryInterface;
 
 class RedirectForm extends AbstractFormWithRepository
 {
     /**
      * @var Redirect
      */
-    protected $_entity;
-
-    /**
-     * @var AdminRepositoryInterface
-     */
-    protected $repositories;
+    protected $entity;
 
     public function buildForm(): FormWithRepositoryInterface
     {
@@ -29,7 +23,7 @@ class RedirectForm extends AbstractFormWithRepository
             $language = $languages->current();
 
             $selected = false;
-            if ($this->_entity->getLanguageShort() === $language->getShortCode()) :
+            if ($this->entity->getLanguageShort() === $language->getShortCode()) :
                 $selected = true;
             endif;
 
