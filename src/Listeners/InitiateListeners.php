@@ -3,6 +3,7 @@
 namespace VitesseCms\Sef\Listeners;
 
 use VitesseCms\Core\AbstractController;
+use VitesseCms\Core\Enum\ViewEnum;
 use VitesseCms\Core\Interfaces\InitiateListenersInterface;
 use VitesseCms\Core\Interfaces\InjectableInterface;
 use VitesseCms\Sef\Listeners\Admin\AdminMenuListener;
@@ -16,5 +17,10 @@ class InitiateListeners implements InitiateListenersInterface
             $di->eventsManager->attach('adminMenu', new AdminMenuListener());
         endif;
         $di->eventsManager->attach(AbstractController::class, new AbstractControllerListener());
+        $di->eventsManager->attach(ViewEnum::SERVICE_LISTENER, new FrontendHtmlListener(
+            $di->view,
+            $di->setting,
+            $di->view->hasCurrentItem() ? $di->view->getCurrentItem() : null
+        ));
     }
 }
