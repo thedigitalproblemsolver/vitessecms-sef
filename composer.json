@@ -9,7 +9,7 @@
   ],
   "homepage": "https://github.com/thedigitalproblemsolver/VitesseCMS",
   "license": "GPL-2.0-or-later",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "authors": [
     {
       "name": "Jasper Jaklofsky",
@@ -28,6 +28,6 @@
     "vitessecms/database": "^1.0.0",
     "vitessecms/admin": "^1.0.0",
     "vitessecms/content": "^1.0.0",
-    "vitessecms/mustache": "^1.1.0"
+    "vitessecms/mustache": "^1.1.1"
   }
 }
