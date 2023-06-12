@@ -30,9 +30,9 @@ class FrontendHtmlListener
 
     private function getMetaDescription(): string
     {
-        $description = $this->settingService->getString('SEO_META_DESCRIPTION');
+        $description = '';
         if ($this->currentItem === null) {
-            return $description;
+            return $this->settingService->getString('SEO_META_DESCRIPTION');
         }
 
         if ($this->currentItem->has('introtext')) {
@@ -40,12 +40,15 @@ class FrontendHtmlListener
         }
 
         if ($this->currentItem->has('bodytext')) {
-            $description = $this->currentItem->_('bodytext');
+            $description = preg_replace('/\{(.*)\}/i', '', $this->currentItem->_('bodytext'));
         }
 
-        $chunks = str_split(trim(strip_tags($description)), 160);
+        $description = trim(strip_tags($description));
+        if (empty($description)) {
+            $description = $this->settingService->getString('SEO_META_DESCRIPTION');
+        }
 
-        return $chunks[0];
+        return str_split($description, 160)[0];
     }
 
     private function getMetaTitle(): string
