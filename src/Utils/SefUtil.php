@@ -42,7 +42,7 @@ class SefUtil
     {
         $factory = new FilterFactory();
         $locator = $factory->newInstance();
-
-        return $locator->sanitize($string, ['url', 'lower']);
+        
+        return $locator->sanitize(str_replace(' ', '-', $string), ['url', 'lower']);
     }
 }
