@@ -31,18 +31,17 @@ class SefUtil
         $userAgent = strtolower($userAgent);
 
         return
-            strpos($userAgent, 'googlebot') === true
-            || strpos($userAgent, 'google-structured-data-testing-tool') === true
-            || strpos($userAgent, 'bingbot') === true
-            || strpos($userAgent, 'msnbot') === true;
+            str_contains($userAgent, 'googlebot') ||
+            str_contains($userAgent, 'google-structured-data-testing-tool') ||
+            str_contains($userAgent, 'bingbot') ||
+            str_contains($userAgent, 'msnbot');
     }
 
     public static function generateSlugFromString(string $string): string
     {
         $string = preg_replace("/[^A-Za-z0-9 ]/", '', $string);
         $string = str_replace(' ', '-', $string);
-        $string = strtolower($string);
-
-        return $string;
+        
+        return strtolower($string);
     }
 }
