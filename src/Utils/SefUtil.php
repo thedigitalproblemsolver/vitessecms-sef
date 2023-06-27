@@ -34,14 +34,15 @@ class SefUtil
             str_contains($userAgent, 'googlebot') ||
             str_contains($userAgent, 'google-structured-data-testing-tool') ||
             str_contains($userAgent, 'bingbot') ||
-            str_contains($userAgent, 'msnbot');
+            str_contains($userAgent, 'msnbot') ||
+            str_contains($userAgent, 'AhrefsBot');
     }
 
     public static function generateSlugFromString(string $string): string
     {
         $string = preg_replace("/[^A-Za-z0-9 ]/", '', $string);
         $string = str_replace(' ', '-', $string);
-        
+
         return strtolower($string);
     }
 }
