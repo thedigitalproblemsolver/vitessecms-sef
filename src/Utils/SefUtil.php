@@ -35,7 +35,9 @@ class SefUtil
             str_contains($userAgent, 'google-structured-data-testing-tool') ||
             str_contains($userAgent, 'bingbot') ||
             str_contains($userAgent, 'msnbot') ||
-            str_contains($userAgent, 'ahrefsbot');
+            str_contains($userAgent, 'ahrefsbot') ||
+            str_contains($userAgent, 'google-inspectiontool') ||
+            str_contains($userAgent, 'applebot');
     }
 
     public static function generateSlugFromString(string $string): string
