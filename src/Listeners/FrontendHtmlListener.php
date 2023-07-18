@@ -3,15 +3,19 @@
 namespace VitesseCms\Sef\Listeners;
 
 use Phalcon\Events\Event;
+use Phalcon\Http\Request;
 use VitesseCms\Content\Models\Item;
 use VitesseCms\Core\Helpers\ItemHelper;
+use VitesseCms\Core\Services\UrlService;
 use VitesseCms\Core\Services\ViewService;
 use VitesseCms\Setting\Services\SettingService;
 
 class FrontendHtmlListener
 {
     public function __construct(
-        public ViewService              $viewService,
+        private readonly Request        $request,
+        private readonly UrlService     $urlService,
+        private readonly ViewService    $viewService,
         private readonly SettingService $settingService,
         private readonly ?Item          $currentItem
     )
@@ -26,6 +30,7 @@ class FrontendHtmlListener
 
         $this->viewService->setVar('SEO_META_TITLE', $this->getMetaTitle());
         $this->viewService->setVar('SEO_META_KEYWORDS', $this->getMetaKeywords());
+        $this->viewService->setVar('CANONICAL_SLUG', $this->getCanonicalSlug());
     }
 
     private function getMetaDescription(): string
@@ -73,5 +78,19 @@ class FrontendHtmlListener
         }
 
         return implode(',', $parentTitles);
+    }
+
+    private function getCanonicalSlug(): string
+    {
+        $canonicalSlug = '';
+        if ($this->currentItem !== null) {
+            $canonicalSlug = $this->currentItem->getSlug();
+        }
+
+        if ($this->request->has('page')) {
+            $canonicalSlug = $this->urlService->addParamsToQuery('page', $this->request->get('page'), $canonicalSlug);
+        }
+
+        return $canonicalSlug;
     }
 }

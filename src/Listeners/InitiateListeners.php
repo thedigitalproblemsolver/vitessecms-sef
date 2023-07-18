@@ -18,6 +18,8 @@ class InitiateListeners implements InitiateListenersInterface
         endif;
         $di->eventsManager->attach(AbstractController::class, new AbstractControllerListener());
         $di->eventsManager->attach(ViewEnum::SERVICE_LISTENER, new FrontendHtmlListener(
+            $di->request,
+            $di->url,
             $di->view,
             $di->setting,
             $di->view->hasCurrentItem() ? $di->view->getCurrentItem() : null
