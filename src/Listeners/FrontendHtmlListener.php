@@ -87,8 +87,8 @@ class FrontendHtmlListener
             $canonicalSlug = $this->currentItem->getSlug();
         }
 
-        if ($this->request->has('page')) {
-            $canonicalSlug = $this->urlService->addParamsToQuery('page', $this->request->get('page'), $canonicalSlug);
+        if ($this->request->has('offset')) {
+            $canonicalSlug = $this->urlService->addParamsToQuery('offset', $this->request->get('offset'), $canonicalSlug);
         }
 
         return $canonicalSlug;
