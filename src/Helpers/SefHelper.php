@@ -22,7 +22,6 @@ class SefHelper
             && $redirect->getTo() !== $_SERVER['REQUEST_URI']
         ) :
             header('HTTP/1.1 301 Moved Permanently');
-            header('X-Robots-Tag: noindex');
             header('Location: ' . $redirect->getTo());
             die();
         endif;
