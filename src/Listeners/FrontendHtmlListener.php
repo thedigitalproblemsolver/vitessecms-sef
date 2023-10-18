@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace VitesseCms\Sef\Listeners;
 
@@ -13,13 +15,12 @@ use VitesseCms\Setting\Services\SettingService;
 class FrontendHtmlListener
 {
     public function __construct(
-        private readonly Request        $request,
-        private readonly UrlService     $urlService,
-        private readonly ViewService    $viewService,
+        private readonly Request $request,
+        private readonly UrlService $urlService,
+        private readonly ViewService $viewService,
         private readonly SettingService $settingService,
-        private readonly ?Item          $currentItem
-    )
-    {
+        private readonly ?Item $currentItem
+    ) {
     }
 
     public function setFrontendVars(Event $event): void
@@ -62,6 +63,10 @@ class FrontendHtmlListener
             return $this->settingService->getString('SITE_TITLE_LABEL_MOTTO');
         }
 
+        if (!empty($this->currentItem->_('seoTitle'))) {
+            return $this->currentItem->getString('seoTitle');
+        }
+
         return $this->currentItem->getNameField();
     }
 
@@ -88,7 +93,11 @@ class FrontendHtmlListener
         }
 
         if ($this->request->has('offset')) {
-            $canonicalSlug = $this->urlService->addParamsToQuery('offset', $this->request->get('offset'), $canonicalSlug);
+            $canonicalSlug = $this->urlService->addParamsToQuery(
+                'offset',
+                $this->request->get('offset'),
+                $canonicalSlug
+            );
         }
 
         return $canonicalSlug;
