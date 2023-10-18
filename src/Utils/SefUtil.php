@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace VitesseCms\Sef\Utils;
 
@@ -43,9 +45,11 @@ class SefUtil
 
     public static function generateSlugFromString(string $string): string
     {
-        $string = preg_replace("/[^A-Za-z0-9 ]/", '', $string);
+        $string = preg_replace("/[^A-Za-z0-9 \-]/", '', $string);
         $string = str_replace(' ', '-', $string);
-
+        $string = str_replace('---', '-', $string);
+        $string = str_replace('--', '-', $string);
+        
         return strtolower($string);
     }
 }
