@@ -45,11 +45,11 @@ class SefUtil
 
     public static function generateSlugFromString(string $string): string
     {
-        $string = preg_replace("/[^A-Za-z0-9 \-]/", '', $string);
+        $string = preg_replace("/[^A-Za-z0-9 \-_]/", '', $string);
         $string = str_replace(' ', '-', $string);
         $string = str_replace('---', '-', $string);
         $string = str_replace('--', '-', $string);
-        
+
         return strtolower($string);
     }
 }
