@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace VitesseCms\Sef\Models;
 
@@ -8,20 +10,14 @@ use VitesseCms\Sef\Utils\SefUtil;
 
 class Redirect extends AbstractCollection
 {
-    /**
-     * @var string
-     */
-    public $from;
+    public ?string $from = null;
+    public ?string $to = null;
+    public ?string $languageShort = null;
 
-    /**
-     * @var string
-     */
-    public $to;
-
-    /**
-     * @var string
-     */
-    public $languageShort;
+    public function getFrom(): ?string
+    {
+        return $this->from;
+    }
 
     public function setFrom(string $from): Redirect
     {
@@ -30,21 +26,16 @@ class Redirect extends AbstractCollection
         return $this;
     }
 
+    public function getTo(): ?string
+    {
+        return $this->to;
+    }
+
     public function setTo(string $to): Redirect
     {
         $this->to = $to;
 
         return $this;
-    }
-
-    public function getFrom(): string
-    {
-        return $this->from;
-    }
-
-    public function getTo(): string
-    {
-        return $this->to;
     }
 
     public function getLanguageShort(): ?string
@@ -60,7 +51,6 @@ class Redirect extends AbstractCollection
     }
 
     //TODO move to listener/mustache?
-
     public function afterFetch()
     {
         $this->set('name', $this->_('from') . ' > ' . $this->_('to'));

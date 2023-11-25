@@ -1,10 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace VitesseCms\Sef\Forms;
 
+use stdClass;
 use VitesseCms\Form\AbstractFormWithRepository;
 use VitesseCms\Form\Interfaces\FormWithRepositoryInterface;
 use VitesseCms\Form\Models\Attributes;
+use VitesseCms\Language\Enums\LanguageEnum;
+use VitesseCms\Language\Repositories\LanguageRepository;
 use VitesseCms\Sef\Models\Redirect;
 
 class RedirectForm extends AbstractFormWithRepository
@@ -14,10 +19,19 @@ class RedirectForm extends AbstractFormWithRepository
      */
     protected $entity;
 
+    private LanguageRepository $languageRepository;
+
+    public function __construct($entity = null, array $userOptions = [])
+    {
+        parent::__construct($entity, $userOptions);
+
+        $this->languageRepository = $this->eventsManager->fire(LanguageEnum::GET_REPOSITORY->value, new stdClass());
+    }
+
     public function buildForm(): FormWithRepositoryInterface
     {
         $languageOptionss = [['value' => '', 'label' => '%FORM_CHOOSE_AN_OPTION%', 'selected' => false]];
-        $languages = $this->repositories->language->findAll(null, false);
+        $languages = $this->languageRepository->findAll(null, false);
 
         while ($languages->valid()) :
             $language = $languages->current();
