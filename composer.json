@@ -25,7 +25,7 @@
     "vitessecms/language": "^1.1.0",
     "vitessecms/core": "^1.7.1",
     "vitessecms/form": "^1.4.0",
-    "vitessecms/database": "^1.4.0",
+    "vitessecms/database": "^1.4.1",
     "vitessecms/admin": "^1.9.0",
     "vitessecms/content": "^1.7.2",
     "vitessecms/mustache": "^1.8.1"
