@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace VitesseCms\Sef\Listeners;
 
@@ -11,18 +12,21 @@ use VitesseCms\Sef\Listeners\Controllers\AbstractControllerListener;
 
 class InitiateListeners implements InitiateListenersInterface
 {
-    public static function setListeners(InjectableInterface $di): void
+    public static function setListeners(InjectableInterface $injectable): void
     {
-        if ($di->user->hasAdminAccess()):
-            $di->eventsManager->attach('adminMenu', new AdminMenuListener());
+        if ($injectable->user->hasAdminAccess()):
+            $injectable->eventsManager->attach('adminMenu', new AdminMenuListener());
         endif;
-        $di->eventsManager->attach(AbstractController::class, new AbstractControllerListener());
-        $di->eventsManager->attach(ViewEnum::SERVICE_LISTENER, new FrontendHtmlListener(
-            $di->request,
-            $di->url,
-            $di->view,
-            $di->setting,
-            $di->view->hasCurrentItem() ? $di->view->getCurrentItem() : null
-        ));
+        $injectable->eventsManager->attach(AbstractController::class, new AbstractControllerListener());
+        $injectable->eventsManager->attach(
+            ViewEnum::SERVICE_LISTENER,
+            new FrontendHtmlListener(
+                $injectable->request,
+                $injectable->url,
+                $injectable->view,
+                $injectable->setting,
+                $injectable->view->hasCurrentItem() ? $injectable->view->getCurrentItem() : null
+            )
+        );
     }
 }
