@@ -28,6 +28,6 @@
     "vitessecms/database": "^1.5.0",
     "vitessecms/admin": "^1.15.0",
     "vitessecms/content": "^1.7.2",
-    "vitessecms/mustache": "^1.8.1"
+    "vitessecms/mustache": "^1.8.2"
   }
 }
