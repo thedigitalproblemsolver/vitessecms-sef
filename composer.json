@@ -29,5 +29,8 @@
     "vitessecms/admin": "^1.16.0",
     "vitessecms/content": "^1.7.2",
     "vitessecms/mustache": "^1.8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5.5"
   }
 }
