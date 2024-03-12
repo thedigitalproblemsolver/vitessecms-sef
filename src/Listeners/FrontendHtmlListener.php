@@ -41,12 +41,12 @@ class FrontendHtmlListener
             return $this->settingService->getString('SEO_META_DESCRIPTION');
         }
 
-        if ($this->currentItem->has('introtext')) {
-            $description = $this->currentItem->_('introtext');
+        if ($this->currentItem->has('bodytext')) {
+            $description = preg_replace('/\{(.*)\}/i', '', $this->currentItem->getString('bodytext'));
         }
 
-        if ($this->currentItem->has('bodytext')) {
-            $description = preg_replace('/\{(.*)\}/i', '', $this->currentItem->_('bodytext'));
+        if ($this->currentItem->has('introtext')) {
+            $description = $this->currentItem->getString('introtext');
         }
 
         $description = trim(strip_tags($description));
